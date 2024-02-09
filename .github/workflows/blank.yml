@@ -1,0 +1,21 @@
+name: Assign
+on:
+  issue_comment:
+    types: created
+
+# Restrict the permissions granted to the use of secrets.GITHUB_TOKEN in this
+# github actions workflow:
+# https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+permissions:
+  issues: write
+
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    # Note that string comparisons is not case sensitive.
+    if: >-
+       startsWith(github.event.comment.body, '/take')
+       && !github.event.issue.assignee
+    steps:
+      - run: |
+          echo ${{ github.event.comment.user.login }}
