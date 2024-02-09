@@ -19,3 +19,4 @@ jobs:
     steps:
       - run: |
           echo ${{ github.event.comment.user.login }}
+          echo "${{ secrets.BOT_GITHUB_TOKEN }}"
